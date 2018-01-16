@@ -17,13 +17,13 @@
 # Available options:
 #
 #   # name of the pipeline
-#   pipeline.id: mylogs
+- pipeline.id: kbaselogs
 #
 #   # The configuration string to be used by this pipeline
 #   config.string: "input { generator {} } filter { sleep { time => 1 } } output { stdout { codec => dots } }"
 #
 #   # The path from where to read the configuration text
-#   path.config: "/etc/conf.d/logstash/myconfig.cfg"
+  path.config: "/usr/share/logstash/pipeline/"
 #
 #   # How many worker threads execute the Filters+Outputs stage of the pipeline
 #   pipeline.workers: 1 (actually defaults to number of CPUs)
@@ -39,7 +39,7 @@
 #
 #   # Internal queuing model, "memory" for legacy in-memory based queuing and
 #   # "persisted" for disk-based acked queueing. Defaults is memory
-#   queue.type: memory
+  queue.type: memory
 #
 #   # If using queue.type: persisted, the page data files size. The queue data consists of
 #   # append-only data files separated into pages. Default is 250mb

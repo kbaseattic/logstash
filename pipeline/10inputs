@@ -1,5 +1,6 @@
 input {
-  stdin {
-    id => "my_plugin_id"
+  tcp {
+    port => 9000
+    codec => "json_lines" 
   }
 }
