@@ -1,0 +1,6 @@
+input {
+  tcp {
+    port => {{ default .Env.listener_port "9000" }}
+    codec => "json_lines" 
+  }
+}

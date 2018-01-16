@@ -1,0 +1,8 @@
+output {
+  {{ if .Env.debug_output }}
+  stdout { codec => rubydebug }
+  {{ end }}
+  {{ if .Env.elastic_server }}
+  elasticsearch { hosts => ["{{ .Env.elastic_server }}" ] }
+  {{ end }}
+}
