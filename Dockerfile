@@ -11,6 +11,7 @@ RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize
     cd /usr/local/bin && \
     tar xvzf /tmp/dockerize.tgz
 ADD .templates /usr/share/logstash/.templates/
+ADD pipeline /usr/share/logstash/pipeline/
 ADD config/ /usr/share/logstash/config/
 
 USER logstash
