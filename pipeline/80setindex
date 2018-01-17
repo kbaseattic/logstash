@@ -3,4 +3,8 @@ filter {
         lowercase => [ "type" ]
         add_field => { "index" => "logstash-%{type}-%{+YYYY.MM.dd}" }
     }
+    # Drop if type isn't a "word"
+    if [type] !~ /^[\w]+$/ {
+        drop { }
+    }
 }
