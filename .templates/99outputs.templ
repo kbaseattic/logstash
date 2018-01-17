@@ -3,6 +3,9 @@ output {
   stdout { codec => rubydebug }
   {{ end }}
   {{ if .Env.elastic_server }}
-  elasticsearch { hosts => ["{{ .Env.elastic_server }}" ] }
+  elasticsearch { 
+    hosts => ["{{ .Env.elastic_server }}" ] 
+    index => "%{index}"
+  }
   {{ end }}
 }

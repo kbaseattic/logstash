@@ -1,0 +1,6 @@
+filter {
+    mutate {
+        lowercase => [ "type" ]
+        add_field => { "index" => "logstash-%{type}-%{+YYYY.MM.dd}" }
+    }
+}
