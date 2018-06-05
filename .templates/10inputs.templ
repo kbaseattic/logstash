@@ -3,4 +3,11 @@ input {
     port => {{ default .Env.listener_port "9000" }}
     codec => "json_lines" 
   }
+  {{ if .Env.collectd_port }}
+  udp {
+    port => {{ .Env.collectd_port }}
+    buffer_size => 1452
+    codec => collectd { }
+  }
+  {{ end }}
 }

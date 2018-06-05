@@ -1,21 +1,23 @@
-FROM docker.elastic.co/logstash/logstash:6.1.2
+FROM docker.elastic.co/logstash/logstash:5.6.9
 EXPOSE 9000
 
 # Based on docs here:
-# https://www.elastic.co/guide/en/logstash/current/_configuring_logstash_for_docker.html
+# https://www.elastic.co/guide/en/logstash/current/docker-config.html
 
-RUN logstash-plugin remove x-pack
-RUN rm -f /usr/share/logstash/pipeline/logstash.conf
+RUN logstash-plugin remove x-pack && \
+    logstash-plugin update logstash-input-udp && \
+    rm -f /usr/share/logstash/pipeline/logstash.conf
+
 USER root
-RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize/dist/dockerize-linux-amd64-v0.5.0.tar.gz && \
-    cd /usr/local/bin && \
+RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize/master/dockerize-linux-amd64-v0.6.1.tar.gz && \
+    cd /usr/bin && \
     tar xvzf /tmp/dockerize.tgz
 ADD .templates /usr/share/logstash/.templates/
 ADD pipeline /usr/share/logstash/pipeline/
 ADD config/ /usr/share/logstash/config/
 
 USER logstash
-ENTRYPOINT [ "/usr/local/bin/dockerize"]
+ENTRYPOINT [ "/usr/bin/dockerize"]
 CMD ["-template", "/usr/share/logstash/.templates/10inputs.templ:/usr/share/logstash/pipeline/10inputs", \
      "-template", "/usr/share/logstash/.templates/99outputs.templ:/usr/share/logstash/pipeline/99outputs", \
-     "logstash" ]
+     "logstash", "-f", "/usr/share/logstash/pipeline" ]
