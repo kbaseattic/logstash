@@ -1,0 +1,22 @@
+filter {
+
+    # Unpack the type_instance field into separate fields
+    if [type] == "collectd" and [collectd_type] == "docker" {
+        kv {
+            source => "type_instance"
+        }
+        mutate {
+            rename => { "image" => "docker_image"
+                        "name" => "container_name"
+                        "short_id" => "container_id" }
+            remove_field => [ "type_instance"]
+        }
+    }
+
+    # Set the type to be composed of the collectd_{collectd_type}
+    if [type] == "collectd" {
+        mutate {
+            replace => { "type" => "%{type}_%{collectd_type}"}
+        }
+    }
+}

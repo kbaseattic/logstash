@@ -1,7 +1,7 @@
 filter {
     mutate {
         lowercase => [ "type" ]
-        add_field => { "index" => "logstash-%{type}-%{+YYYY.MM.dd}" }
+        add_field => { "index" => "logstash-%{type}-%{+xxx.ww}" }
     }
 
     # If we are given a timestamp field, use that as the timestamp

@@ -8,7 +8,10 @@ input {
   udp {
     port => {{ .Env.collectd_port }}
     buffer_size => 1452
-    codec => collectd { }
+    codec => collectd {
+      typesdb => [ '/usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-codec-collectd-3.0.8/vendor/types.db',
+                    '/usr/share/logstash/config/types.db' ]
+     }
     type => "collectd"
   }
   {{ end }}
