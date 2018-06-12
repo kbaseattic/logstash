@@ -1,4 +1,8 @@
 filter {
+    # Drop if type isn't a "word"
+    if [type] !~ /^[\w]+$/ {
+        drop { }
+    }
     mutate {
         lowercase => [ "type" ]
         add_field => { "index" => "logstash-%{type}-%{+YYYY.MM.dd}" }
@@ -14,8 +18,4 @@ filter {
         }
     }
 
-    # Drop if type isn't a "word"
-    if [type] !~ /^[\w]+$/ {
-        drop { }
-    }
 }
