@@ -1,3 +1,4 @@
+FROM kbase/docker-collectd:latest as collectd
 FROM docker.elastic.co/logstash/logstash:5.6.9
 EXPOSE 9000
 
@@ -16,6 +17,8 @@ RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize
 ADD .templates /usr/share/logstash/.templates/
 ADD pipeline /usr/share/logstash/pipeline/
 ADD config/ /usr/share/logstash/config/
+# Update the types.db to match the collectd we're using
+COPY --from=collectd /usr/share/collectd/types.db /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-codec-collectd-3.0.8/vendor/types.db
 
 USER logstash
 ENTRYPOINT [ "/usr/bin/dockerize"]
