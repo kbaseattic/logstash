@@ -1,5 +1,5 @@
 FROM kbase/docker-collectd:latest as collectd
-FROM docker.elastic.co/logstash/logstash:5.6.9
+FROM docker.elastic.co/logstash/logstash:5.6.14
 EXPOSE 9000
 
 # Based on docs here:
