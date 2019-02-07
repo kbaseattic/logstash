@@ -22,6 +22,11 @@
 -XX:CMSInitiatingOccupancyFraction=75
 -XX:+UseCMSInitiatingOccupancyOnly
 
+## optimizations
+
+# disable calls to System#gc
+-XX:+DisableExplicitGC
+
 ## Locale
 # Set the locale language
 #-Duser.language=en
@@ -47,9 +52,7 @@
 #-Djna.nosys=true
 
 # Turn on JRuby invokedynamic
--Djruby.compile.invokedynamic=true
-# Force Compilation
--Djruby.jit.threshold=0
+# -Djruby.compile.invokedynamic=true
 
 ## heap dumps
 
