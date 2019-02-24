@@ -8,6 +8,11 @@ filter {
         add_field => { "index" => "logstash-%{type}-%{+YYYY.MM.dd}" }
     }
 
+    if ([last_ip] and [state] != "queued") {
+       geoip { source => "last_ip" }
+    }
+
+
     # If we are given a timestamp field, use that as the timestamp
     if [timestamp] {
         date {
