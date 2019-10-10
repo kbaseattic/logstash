@@ -4,6 +4,9 @@ input {
     codec => "json_lines"
     type => "json_lines" 
   }
+  beats {
+    port => {{ default .Env.beats_port "5044" }}
+  }
   {{ if .Env.collectd_port }}
   udp {
     port => {{ .Env.collectd_port }}

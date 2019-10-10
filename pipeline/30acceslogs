@@ -1,0 +1,13 @@
+filter {
+
+    # This filter is setup to use filebeat shipped nginx logs
+    # Unpack the type_instance field into separate fields
+    if [type] == "accesslog" {
+        grok {
+            match => [ "message", "%{COMBINEDAPACHELOG}" ]
+        }
+        geoip {
+            source => "clientip"
+        }
+    }
+}
