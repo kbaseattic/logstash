@@ -6,6 +6,12 @@ filter {
         grok {
             match => [ "message", "%{COMBINEDAPACHELOG}" ]
         }
+        mutate {
+            convert => { "response" => "integer"
+                         "bytes" => "integer" }
+            gsub => ["agent",'\"','']
+            gsub => ["referrer",'\"',""]
+        }
         geoip {
             source => "clientip"
         }
