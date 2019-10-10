@@ -6,6 +6,9 @@ filter {
         grok {
             match => [ "message", "%{COMBINEDAPACHELOG}" ]
         }
+        grok {
+            match => [ "request", "^/services/(?<service>[^/?#]+)" ]
+        }
         mutate {
             convert => { "response" => "integer"
                          "bytes" => "integer" }
