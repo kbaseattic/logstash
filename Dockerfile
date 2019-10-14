@@ -2,7 +2,7 @@ FROM kbase/docker-collectd:latest as collectd
 FROM logstash:5.6
 
 ARG BUILD_DATE
-ARG VCS_REF
+ARG COMMIT
 ARG BRANCH
 ARG TAG
 
