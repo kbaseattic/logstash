@@ -1,0 +1,21 @@
+#!/bin/bash -x
+
+# See the docs for automated docker builds: https://docs.docker.com/docker-cloud/builds/advanced/
+
+# $IMAGE_NAME var is injected into the build so the tag is correct.
+
+echo "Build hook running"
+echo "IMAGE_NAME = ${IMAGE_NAME}"
+echo "DOCKER_REPO = ${DOCKER_REPO}"
+
+export BRANCH=${SOURCE_BRANCH:-`git symbolic-ref --short HEAD`}
+export DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
+export COMMIT=${SOURCE_COMMIT:-`git rev-parse --short HEAD`}
+export TAG=`if [ "$BRANCH" == "master" ]; then echo "latest"; else echo $BRANCH ; fi`
+
+docker build --build-arg BUILD_DATE=$DATE \
+             --build-arg VCS_REF=$COMMIT \
+             --build-arg BRANCH=$BRANCH \
+             --build-arg TAG=$TAG \
+             -t ${IMAGE_NAME} .
+echo "Built and tagged ${IMAGE_NAME}"

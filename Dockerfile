@@ -1,5 +1,11 @@
 FROM kbase/docker-collectd:latest as collectd
 FROM logstash:5.6
+
+ARG BUILD_DATE
+ARG VCS_REF
+ARG BRANCH
+ARG TAG
+
 EXPOSE 9000
 
 # Based on docs here:
@@ -27,6 +33,13 @@ ADD config/ /usr/share/logstash/config/
 # Update the types.db to match the collectd we're using
 COPY --from=collectd /usr/share/collectd/types.db /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-codec-collectd-3.0.8/vendor/types.db
 RUN chown -R logstash:logstash /usr/share/logstash/pipeline
+
+LABEL org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.vcs-url="https://github.com/kbase/logstash.git" \
+      org.label-schema.vcs-ref=$COMMIT \
+      org.label-schema.schema-version="1.0.0-rc1" \
+      us.kbase.vcs-branch=$BRANCH  \
+      maintainer="Steve Chan sychan@lbl.gov"
 
 USER logstash
 ENTRYPOINT [ "/usr/bin/dockerize"]
