@@ -16,7 +16,7 @@ filter {
     # If we are given a timestamp field, use that as the timestamp
     if [timestamp] {
         date {
-            match => ["timestamp", "ISO8601", "dd/MMM/yyyY:HH:mm:ss Z" ]
+            match => ["src_timestamp", "ISO8601", "dd/MMM/yyyy:HH:mm:ss Z" ]
         }
         mutate {
             remove_field => [ "timestamp"]
