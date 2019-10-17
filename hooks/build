@@ -14,7 +14,7 @@ export COMMIT=${SOURCE_COMMIT:-`git rev-parse --short HEAD`}
 export TAG=`if [ "$BRANCH" == "master" ]; then echo "latest"; else echo $BRANCH ; fi`
 
 docker build --build-arg BUILD_DATE=$DATE \
-             --build-arg VCS_REF=$COMMIT \
+             --build-arg COMMIT=$COMMIT \
              --build-arg BRANCH=$BRANCH \
              --build-arg TAG=$TAG \
              -t ${IMAGE_NAME} .
