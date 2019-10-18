@@ -4,7 +4,7 @@
 # Xmx represents the maximum size of total heap space
 
 -Xms1g
--Xmx1g
+-Xmx3g
 
 ################################################################
 ## Expert settings
