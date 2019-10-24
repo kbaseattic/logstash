@@ -29,13 +29,13 @@
   pipeline.workers: 8
 #
 #   # How many events to retrieve from inputs before sending to filters+workers
-  pipeline.batch.size: 20000
+  pipeline.batch.size: 5000
 #
 #   # How long to wait before dispatching an undersized batch to filters+workers
 #   pipeline.batch.delay: 5
 #
 #   # How many workers should be used per output plugin instance
-  pipeline.output.workers: 4
+  pipeline.output.workers: 8
 #
 #   # Internal queuing model, "memory" for legacy in-memory based queuing and
 #   # "persisted" for disk-based acked queueing. Defaults is memory
