@@ -30,6 +30,7 @@ RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize
 ADD .templates /usr/share/logstash/.templates/
 ADD pipeline /usr/share/logstash/pipeline/
 ADD config/ /etc/logstash
+COPY config/types.db /usr/share/logstash/config
 # Update the types.db to match the collectd we're using
 COPY --from=collectd /usr/share/collectd/types.db /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-codec-collectd-3.0.8/vendor/types.db
 RUN chown -R logstash:logstash /usr/share/logstash/pipeline
