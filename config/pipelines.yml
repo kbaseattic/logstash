@@ -26,20 +26,20 @@
   path.config: "/usr/share/logstash/pipeline/"
 #
 #   # How many worker threads execute the Filters+Outputs stage of the pipeline
-  pipeline.workers: 8
+#  pipeline.workers: 8
 #
 #   # How many events to retrieve from inputs before sending to filters+workers
-  pipeline.batch.size: 5000
+#  pipeline.batch.size: 10000
 #
 #   # How long to wait before dispatching an undersized batch to filters+workers
 #   pipeline.batch.delay: 5
 #
 #   # How many workers should be used per output plugin instance
-  pipeline.output.workers: 8
+#  pipeline.output.workers: 8
 #
 #   # Internal queuing model, "memory" for legacy in-memory based queuing and
 #   # "persisted" for disk-based acked queueing. Defaults is memory
-  queue.type: memory
+#  queue.type: memory
 #
 #   # If using queue.type: persisted, the page data files size. The queue data consists of
 #   # append-only data files separated into pages. Default is 250mb

@@ -34,15 +34,15 @@
 #
 # This defaults to the number of the host's CPU cores.
 #
-pipeline.workers: 8
+pipeline.workers: 4
 #
 # How many workers should be used per output plugin instance
 #
-pipeline.output.workers: 8
+pipeline.output.workers: 4
 #
 # How many events to retrieve from inputs before sending to filters+workers
 #
-pipeline.batch.size: 5000
+pipeline.batch.size: 4096
 #
 # How long to wait before dispatching an undersized batch to filters+workers
 # Value is in milliseconds.
