@@ -33,7 +33,7 @@ ADD config/ /etc/logstash
 COPY config/types.db /usr/share/logstash/config
 # Update the types.db to match the collectd we're using
 COPY --from=collectd /usr/share/collectd/types.db /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-codec-collectd-3.0.8/vendor/types.db
-RUN chown -R logstash:logstash /usr/share/logstash/pipeline
+RUN chown -R logstash:logstash /usr/share/logstash/pipeline /etc/logstash/logstash.yml
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-url="https://github.com/kbase/logstash.git" \
@@ -46,4 +46,5 @@ USER logstash
 ENTRYPOINT [ "/usr/bin/dockerize"]
 CMD ["-template", "/usr/share/logstash/.templates/10inputs.templ:/usr/share/logstash/pipeline/10inputs", \
      "-template", "/usr/share/logstash/.templates/99outputs.templ:/usr/share/logstash/pipeline/99outputs", \
+     "-template", "/usr/share/logstash/.templates/logstash.yml.templ:/etc/logstash/logstash.yml", \
      "logstash", "-f", "/usr/share/logstash/pipeline" ]
