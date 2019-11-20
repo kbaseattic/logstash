@@ -1,0 +1,18 @@
+filter {
+
+  if [type] == "errorlogs" {
+    fingerprint {
+        target => "%{[@metadata][doc_id]}"
+        method => "SHA256"
+        source => ["@timestamp","user"]
+        key => "0keyd0key"
+        base64encode => true
+        concatenate_sources => true
+    }
+  } else {
+    fingerprint {
+        target => "%{[@metadata][doc_id]}"
+        method => "UUID"
+    }
+  }
+}

@@ -22,7 +22,4 @@ filter {
     if ([last_ip] and [state] != "queued") {
        geoip { source => "last_ip" }
     }
-
-
-
 }
