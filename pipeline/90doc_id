@@ -2,7 +2,7 @@ filter {
 
   if [type] == "errorlogs" {
     fingerprint {
-        target => "%{[@metadata][doc_id]}"
+        target => "fingerprint"
         method => "SHA256"
         source => ["@timestamp","user"]
         key => "0keyd0key"
@@ -11,7 +11,7 @@ filter {
     }
   } else {
     fingerprint {
-        target => "%{[@metadata][doc_id]}"
+        target => "fingerprint"
         method => "UUID"
     }
   }

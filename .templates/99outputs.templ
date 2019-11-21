@@ -7,7 +7,7 @@ output {
   elasticsearch { 
     hosts => ["{{ .Env.elastic_server }}" ] 
     index => "%{index}"
-    document_id => "%{[@metadata][doc_id]}"
+    document_id => "%{fingerprint}"
   }
   {{ end }}
 }
