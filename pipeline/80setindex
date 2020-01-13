@@ -13,10 +13,21 @@ filter {
             remove_field => [ "timestamp"]
         }
     }
-
     mutate {
         lowercase => [ "type" ]
-        add_field => { "index" => "logstash-%{type}-%{+YYYY.MM.dd}" }
+    }
+
+    # If we are given an errorlog type, we set the index increment to be by month
+    if [type] == "errorlogs" {
+        mutate {
+            add_field => { "index" => "logstash-%{type}-%{+YYYY.MM}" }
+        }
+    }
+
+    else {
+        mutate {
+            add_field => { "index" => "logstash-%{type}-%{+YYYY.MM.dd}" }
+        }
     }
 
     if ([last_ip] and [state] != "queued") {
