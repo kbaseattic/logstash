@@ -21,10 +21,10 @@ RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize
     mkdir -p /usr/share/logstash/config && \
     curl -o /usr/share/logstash/config/collectd-types.db https://raw.githubusercontent.com/collectd/collectd/master/src/types.db && \
     cd /tmp && \
-    curl -o GeoLite2.tar.gz https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz && \
-    curl -o GeoLite2-ASN.tar.gz https://geolite.maxmind.com/download/geoip/database/GeoLite2-ASN.tar.gz && \
-    tar xvzf GeoLite2.tar.gz --strip-components=1 && \
+    curl -o GeoLite2-ASN.tar.gz "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=sQ5z7FLFkY8YApnk&suffix=tar.gz" && \
+    curl -o GeoLite2-City.tar.gz "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=sQ5z7FLFkY8YApnk&suffix=tar.gz" && \
     tar xvzf GeoLite2-ASN.tar.gz --strip-components=1 && \
+    tar xvzf GeoLite2-City.tar.gz --strip-components=1 && \
     cp GeoLite2-City.mmdb GeoLite2-ASN.mmdb /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-filter-geoip-4.3.1-java/vendor && \
     rm *.txt *.mmdb
 ADD .templates /usr/share/logstash/.templates/
