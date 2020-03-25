@@ -18,7 +18,7 @@ filter {
     }
 
     # If we are given an errorlog type, we set the index increment to be by month
-    if [type] == "errorlogs" {
+    if [type] == "errorlogs" or "ee2errorlogs" {
         mutate {
             add_field => { "index" => "logstash-%{type}-%{+YYYY.MM}" }
         }

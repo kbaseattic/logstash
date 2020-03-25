@@ -1,6 +1,6 @@
 filter {
 
-  if [type] == "errorlogs" {
+  if [type] == "errorlogs" or "ee2errorlogs" {
     fingerprint {
         target => "fingerprint"
         method => "SHA256"
