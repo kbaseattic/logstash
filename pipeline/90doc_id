@@ -9,10 +9,5 @@ filter {
         base64encode => true
         concatenate_sources => true
     }
-  } else {
-    fingerprint {
-        target => "fingerprint"
-        method => "UUID"
-    }
   }
 }
