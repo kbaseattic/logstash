@@ -1,6 +1,6 @@
 filter {
 
-  if [type] == "errorlogs" or "ee2errorlogs" {
+  if [type] in ["errorlogs", "ee2errorlogs"] {
     fingerprint {
         target => "fingerprint"
         method => "SHA256"
@@ -8,6 +8,11 @@ filter {
         key => "0keyd0key"
         base64encode => true
         concatenate_sources => true
+    } else {
+      fingerprint {
+          target => "fingerprint"
+          method => "UUID"
+      }
     }
   }
 }
