@@ -8,11 +8,11 @@ filter {
         key => "0keyd0key"
         base64encode => true
         concatenate_sources => true
-    } else {
+    }
+  } else {
       fingerprint {
           target => "fingerprint"
           method => "UUID"
       }
-    }
   }
 }
