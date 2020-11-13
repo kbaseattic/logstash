@@ -7,8 +7,8 @@ output {
   elasticsearch { 
     hosts => ["{{ .Env.elastic_server }}" ] 
     {{ if .Env.elastic_user }}
-    user => {{ .Env.elastic_user }}
-    password => {{ .Env.elastic_password }}
+    user => "{{ .Env.elastic_user }}"
+    password => "{{ .Env.elastic_password }}"
     {{ end }}
     index => "%{index}"
     document_id => "%{fingerprint}"
