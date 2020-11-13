@@ -16,6 +16,9 @@ output {
     {{ if .Env.elastic_ssl_certificate_verification }}
     ssl_certificate_verification => {{ .Env.elastic_ssl_certificate_verification }}
     {{ end }}
+    {{ if .Env.elastic_cacert }}
+    cacert => "{{ .Env.elastic_cacert }}"
+    {{ end }}
 
     index => "%{index}"
     document_id => "%{fingerprint}"
