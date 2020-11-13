@@ -29,11 +29,10 @@ RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize
     rm *.txt *.mmdb
 ADD .templates /usr/share/logstash/.templates/
 ADD pipeline /usr/share/logstash/pipeline/
-ADD config/ /etc/logstash
-COPY config/types.db /usr/share/logstash/config
+ADD config/ /usr/share/logstash/config
 # Update the types.db to match the collectd we're using
 COPY --from=collectd /usr/share/collectd/types.db  /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-codec-collectd-3.0.8/vendor/types.db
-RUN chown -R logstash:logstash /usr/share/logstash/pipeline /etc/logstash/logstash.yml
+RUN chown -R logstash:logstash /usr/share/logstash/pipeline /usr/share/logstash/config/logstash.yml
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-url="https://github.com/kbase/logstash.git" \
