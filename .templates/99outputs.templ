@@ -10,6 +10,10 @@ output {
     user => "{{ .Env.elastic_user }}"
     password => "{{ .Env.elastic_password }}"
     {{ end }}
+    {{ if .Env.elastic_ssl }}
+    ssl => {{ .Env.elastic_ssl }}
+    ssl_certificate_verification => {{ default .Env.elastic_ssl_certificate_verification "false" }}
+    {{ end }}
     index => "%{index}"
     document_id => "%{fingerprint}"
   }
