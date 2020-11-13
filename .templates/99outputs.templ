@@ -12,8 +12,11 @@ output {
     {{ end }}
     {{ if .Env.elastic_ssl }}
     ssl => {{ .Env.elastic_ssl }}
-    ssl_certificate_verification => {{ default .Env.elastic_ssl_certificate_verification "false" }}
     {{ end }}
+    {{ if .Env.elastic_ssl_certificate_verification }}
+    ssl_certificate_verification => {{ .Env.elastic_ssl_certificate_verification }}
+    {{ end }}
+
     index => "%{index}"
     document_id => "%{fingerprint}"
   }
