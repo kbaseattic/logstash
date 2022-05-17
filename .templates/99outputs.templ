@@ -6,6 +6,20 @@ output {
   {{ if .Env.elastic_server }}
   elasticsearch { 
     hosts => ["{{ .Env.elastic_server }}" ] 
+    {{ if .Env.elastic_user }}
+    user => "{{ .Env.elastic_user }}"
+    password => "{{ .Env.elastic_password }}"
+    {{ end }}
+    {{ if .Env.elastic_ssl }}
+    ssl => {{ .Env.elastic_ssl }}
+    {{ end }}
+    {{ if .Env.elastic_ssl_certificate_verification }}
+    ssl_certificate_verification => {{ .Env.elastic_ssl_certificate_verification }}
+    {{ end }}
+    {{ if .Env.elastic_cacert }}
+    cacert => "{{ .Env.elastic_cacert }}"
+    {{ end }}
+
     index => "%{index}"
     document_id => "%{fingerprint}"
   }
